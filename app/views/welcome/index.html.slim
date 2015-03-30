@@ -1,0 +1,9 @@
+div class="row"
+  div class="col-md-2"
+  div class="col-md-8"
+    h1 Welcome to Smart Spigot
+    div class='row'
+      div class='col-md-12'
+        -if user_signed_in?
+          =button_to "Register a new spigot", new_spigot_path
+  div class="col-md-2"
