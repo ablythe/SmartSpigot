@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20150331171106) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "waterings", force: :cascade do |t|
-    t.integer  "spigots_id"
+    t.integer  "spigot_id"
     t.time     "start_time"
     t.time     "end_time"
     t.boolean  "monday",     default: false, null: false
@@ -63,6 +63,6 @@ ActiveRecord::Schema.define(version: 20150331171106) do
     t.datetime "updated_at",                 null: false
   end
 
-  add_index "waterings", ["spigots_id"], name: "index_waterings_on_spigots_id"
+  add_index "waterings", ["spigot_id"], name: "index_waterings_on_spigot_id"
 
 end

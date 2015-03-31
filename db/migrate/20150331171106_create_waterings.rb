@@ -1,7 +1,7 @@
 class CreateWaterings < ActiveRecord::Migration
   def change
     create_table :waterings do |t|
-      t.belongs_to :spigots, index: true
+      t.belongs_to :spigot, index: true
       t.time :start_time
       t.time :end_time
       t.boolean :monday, null:false, default:false
@@ -14,6 +14,6 @@ class CreateWaterings < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_foreign_key :waterings, :spigots
+    add_foreign_key :waterings, :spigot
   end
 end

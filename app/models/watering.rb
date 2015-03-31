@@ -1,3 +1,3 @@
 class Watering < ActiveRecord::Base
-  belongs_to :spigots
+  belongs_to :spigot
 end
