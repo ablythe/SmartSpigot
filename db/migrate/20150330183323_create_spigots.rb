@@ -4,8 +4,10 @@ class CreateSpigots < ActiveRecord::Migration
       t.string :name
       t.string :isp
       t.string :location
-      t.integer :zipcode
+      t.string :zipcode
       t.integer :threshold
+      t.boolean :on
+      t.datetime :user_overriden
       t.belongs_to :user, index: true
 
       t.timestamps null: false

@@ -48,6 +48,7 @@ gem 'slim-rails'
 gem 'httparty'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
+gem 'zip-codes'
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'

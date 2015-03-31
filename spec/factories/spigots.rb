@@ -6,6 +6,7 @@ FactoryGirl.define do
     zipcode 20011
     threshold 70
     user nil
+    on false
   end
 
 end

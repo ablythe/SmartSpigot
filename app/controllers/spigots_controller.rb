@@ -10,13 +10,12 @@ class SpigotsController < ApplicationController
 
   def show
     @spigot =Spigot.find(params['id'])
+    @city = ZipCodes.identify(@spigot.zipcode.to_s)
+    @status = @spigot.on ? "On" : "Off"
   end
 
   def index
     @spigots = current_user.spigots.all
   end
 
-  def update
-    
-  end
 end

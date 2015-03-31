@@ -26,23 +26,20 @@ RSpec.describe SpigotsController, type: :controller do
     expect(response.code.to_i).to eq 200
   end
 
-  it "can edit spigot schedules" do
-    spigot = FactoryGirl.create :spigot 
-    patch :update, id:spigot.id
-    expect(response.code.to_i).to eq 302
-    expect(spigot.waterings.count).to eq 1
+  it "knows a spigot's city" do
+    spigot = FactoryGirl.create :spigot
+    get :show, id: spigot.id
+    expect(response.body).to include "Washington"
   end
 
-  it "knows a spigots location" do
+  it "knows if a spigot is on" do
+    spigot =FactoryGirl.create :spigot
+    get :show, id: spigot.id
+    expect(response.body).to include "Status: Off"
+    spigot.on = true
+    spigot.save
+    get :show, id: spigot.id
+    expect(response.body).to include "Status: On"
   end
-
-  it "knows weather for a spigot" do
-  end
-  it "knows when weather should override schedule" do
-  end
-
-  it "can turn on a spigot for some time interval" do
-  end
-
 
 end

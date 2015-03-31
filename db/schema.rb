@@ -17,11 +17,13 @@ ActiveRecord::Schema.define(version: 20150331171106) do
     t.string   "name"
     t.string   "isp"
     t.string   "location"
-    t.integer  "zipcode"
+    t.string   "zipcode"
     t.integer  "threshold"
+    t.boolean  "on"
+    t.datetime "user_overriden"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   add_index "spigots", ["user_id"], name: "index_spigots_on_user_id"
