@@ -3,5 +3,8 @@ Rails.application.routes.draw do
   
   root 'welcome#index'
 
-  resources :spigot
+  resources :spigots do
+    resources :waterings
+  end
+
 end

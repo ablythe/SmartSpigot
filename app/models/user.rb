@@ -15,7 +15,6 @@ class User < ActiveRecord::Base
       if registered_user
         return registered_user
       else
-        binding.pry
         user = User.create(
           provider:access_token.provider,
           email: data["email"],

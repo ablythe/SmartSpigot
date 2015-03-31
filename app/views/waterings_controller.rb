@@ -1,0 +1,3 @@
+class WateringsController <ApplicationController
+
+end

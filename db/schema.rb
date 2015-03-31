@@ -11,11 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150330183323) do
+ActiveRecord::Schema.define(version: 20150331171106) do
 
   create_table "spigots", force: :cascade do |t|
     t.string   "name"
     t.string   "isp"
+    t.string   "location"
+    t.integer  "zipcode"
+    t.integer  "threshold"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -42,5 +45,22 @@ ActiveRecord::Schema.define(version: 20150330183323) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "waterings", force: :cascade do |t|
+    t.integer  "spigots_id"
+    t.time     "start_time"
+    t.time     "end_time"
+    t.boolean  "monday",     default: false, null: false
+    t.boolean  "tuesday",    default: false, null: false
+    t.boolean  "wednesday",  default: false, null: false
+    t.boolean  "thursday",   default: false, null: false
+    t.boolean  "friday",     default: false, null: false
+    t.boolean  "saturday",   default: false, null: false
+    t.boolean  "sunday",     default: false, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "waterings", ["spigots_id"], name: "index_waterings_on_spigots_id"
 
 end
