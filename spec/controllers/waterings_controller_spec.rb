@@ -13,9 +13,10 @@ it "can create a new watering" do
   expect(@spigot.waterings.count).to eq 1
 end
 
-it "can see waterings" do
-  end
 it "can show a watering" do
+  watering = FactoryGirl.create :watering, spigot: @spigot
+  get :show, spigot_id: @spigot, id: watering
+  expect(response.code.to_i).to eq 200
 end
 
 it "can edit a watering" do

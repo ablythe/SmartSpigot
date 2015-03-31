@@ -1,0 +1,22 @@
+h3 = "Start Time: #{@watering.start_time.to_s}"
+h3 ="End Time: #{@watering.end_time.to_s}"
+table class="table"
+  thead
+    tr
+      th Monday
+      th Tuesday
+      th Wednesday
+      th Thursday
+      th Friday
+      th Saturday
+      th Sunday
+  tbody
+    tr
+      -days = %w(monday tuesday wednesday thursday friday saturday sunday)
+      -days.each do |day|
+        -if @watering[day] == true
+          td 
+            span class="glyphicon glyphicon-ok" aria-hidden="true"
+        -else
+          td
+            span class="glyphicon glyphicon-remove" aria-hidden="true"

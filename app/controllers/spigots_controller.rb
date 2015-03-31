@@ -4,13 +4,13 @@ class SpigotsController < ApplicationController
   end
 
   def create
-    @spigot = current_user.spigots.create(name: params[:name], isp: params['isp'])
+    @spigot = current_user.spigots.create(name: params['spigot'][:name], isp: params['spigot']['isp'], location: params['spigot']["location"], zipcode: params['spigot']["zipcode"])
     redirect_to spigot_path @spigot
   end
 
   def show
     @spigot =Spigot.find(params['id'])
-    @city = ZipCodes.identify(@spigot.zipcode.to_s)
+    @city = ZipCodes.identify(@spigot.zipcode.to_s)[:city]
     @status = @spigot.on ? "On" : "Off"
   end
 

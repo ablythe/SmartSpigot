@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :spigots do
-    resources :waterings
+    resources :waterings, only: [:new, :create, :show, :update, :destroy]
   end
 
 end

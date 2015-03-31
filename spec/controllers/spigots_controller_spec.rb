@@ -26,6 +26,12 @@ RSpec.describe SpigotsController, type: :controller do
     expect(response.code.to_i).to eq 200
   end
 
+  it "knows when a spigot has waterings" do
+  end
+
+  if "knows when a spigot doesn't have waterings" do
+  end
+
   it "knows a spigot's city" do
     spigot = FactoryGirl.create :spigot
     get :show, id: spigot.id

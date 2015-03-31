@@ -13,4 +13,9 @@ class WateringsController < ApplicationController
       sunday: params['sunday'])
     redirect_to spigots_path @spigot
   end
+
+  def show
+    @watering = Watering.find(params[:id])
+    
+  end
 end
