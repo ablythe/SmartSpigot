@@ -16,6 +16,7 @@ class WateringsController < ApplicationController
 
   def show
     @watering = Watering.find(params[:id])
-    
+    @start_time = @watering.parse_time @watering.start_time
+    @end_time = @watering.parse_time @watering.end_time
   end
 end
