@@ -1,17 +1,32 @@
 require 'rails_helper'
 
 RSpec.describe WateringsController, type: :controller do
-render_views
+  render_views
   before :each do
     @user= FactoryGirl.create :user
     login @user
     @spigot = FactoryGirl.create :spigot
   end
-it "can create a new watering" do
-  post :create, spigot_id: @spigot, start_time: "9:00 AM", end_time: "10:00 AM", monday: true, tuesday: false, wednesday: true, thursday: false, friday: true, saturday: false, sunday: false
-  expect(response.code.to_i).to eq 302
-  expect(@spigot.waterings.count).to eq 1
-end
+  it "can create a new watering" do
+    params = {
+      spigot_id: @spigot,
+      watering:
+      {
+        'start_time(4i)' => '9',
+        'start_time(5i)'=> '00',
+        'end_time(4i)'=> '10',
+        'end_time(5i)'=> '00',
+        monday: true, 
+        tuesday: false, 
+        wednesday: true, 
+        thursday: false, 
+        friday: true, 
+        saturday: false, 
+        sunday: false}}
+    post :create, params
+    expect(response.code.to_i).to eq 302
+    expect(@spigot.waterings.count).to eq 1
+  end
 
 it "can show a watering" do
   watering = FactoryGirl.create :watering, spigot: @spigot
@@ -37,10 +52,10 @@ it "can edit a watering" do
       saturday: true,
       sunday: watering.sunday
       }}
-  patch :update, params
-  updated_watering = Watering.find(watering.id)
-  expect(updated_watering.monday).to eq false
-  expect(updated_watering.saturday).to eq true
-  end
+      patch :update, params
+      updated_watering = Watering.find(watering.id)
+      expect(updated_watering.monday).to eq false
+      expect(updated_watering.saturday).to eq true
+    end
 
-end
+  end

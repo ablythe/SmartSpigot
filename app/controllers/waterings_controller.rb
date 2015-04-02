@@ -19,8 +19,7 @@ class WateringsController < ApplicationController
       friday: data['friday'],
       saturday: data['saturday'],
       sunday: data['sunday'])
-    binding.pry
-    redirect_to spigots_path @spigot
+    redirect_to spigot_path @spigot
   end
 
   def show
