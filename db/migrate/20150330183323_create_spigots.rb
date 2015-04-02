@@ -4,7 +4,13 @@ class CreateSpigots < ActiveRecord::Migration
       t.string :name
       t.string :isp
       t.string :location
+      t.float  :latitude
+      t.float  :longitude
       t.string :zipcode
+      t.string :street_address
+      t.string :city
+      t.string :state
+      t.string :country
       t.integer :threshold
       t.boolean :on
       t.datetime :user_overriden

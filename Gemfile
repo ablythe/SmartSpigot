@@ -49,6 +49,7 @@ gem 'httparty'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'zip-codes'
+gem 'geocoder'
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'

@@ -4,7 +4,16 @@ class SpigotsController < ApplicationController
   end
 
   def create
-    @spigot = current_user.spigots.create(name: params['spigot'][:name], isp: params['spigot']['isp'], location: params['spigot']["location"], zipcode: params['spigot']["zipcode"])
+    @spigot = current_user.spigots.create(
+      name: params['spigot'][:name], 
+      isp: params['spigot']['isp'], 
+      location: params['spigot']["location"], 
+      street_address: params['spigot']['street_address'],
+      city: params['spigot']['city'],
+      state: params['spigot']['state'],
+      country: params['spigot']['country'],
+      zipcode: params['spigot']["zipcode"]
+      )
     redirect_to spigot_path @spigot
   end
 
