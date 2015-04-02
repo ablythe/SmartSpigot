@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150331171106) do
+ActiveRecord::Schema.define(version: 20150402171444) do
 
   create_table "spigots", force: :cascade do |t|
     t.string   "name"
@@ -70,5 +70,14 @@ ActiveRecord::Schema.define(version: 20150331171106) do
   end
 
   add_index "waterings", ["spigot_id"], name: "index_waterings_on_spigot_id"
+
+  create_table "weather_apis", force: :cascade do |t|
+    t.integer  "precip_chance"
+    t.integer  "temp_min"
+    t.integer  "temp_max"
+    t.integer  "spigot_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
 end

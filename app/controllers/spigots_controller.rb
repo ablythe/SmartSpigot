@@ -19,8 +19,8 @@ class SpigotsController < ApplicationController
 
   def show
     @spigot =Spigot.find(params['id'])
-    @city = ZipCodes.identify(@spigot.zipcode.to_s)[:city]
     @status = @spigot.on ? "On" : "Off"
+    @weather =@spigot.get_days_weather
   end
 
   def index
