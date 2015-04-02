@@ -1,9 +1,34 @@
 div class="row"
   div class='col-md-9'
-    h1= "Spigot: #{@spigot.name}"
-    h3= "Location: #{@spigot.location}"
-    h3= "City: #{@spigot.city}"
-    h3= "Status: #{@status}"
+    div class= 'row'
+      h1= "Spigot: #{@spigot.name}"
+      h3= "Location: #{@spigot.location}"
+      h3= "City: #{@spigot.city}"
+      h3= "Status: #{@status}"
+    div clss='row'
+      table class='table'
+        -days =%w(monday tuesday wednesday thursday friday saturday sunday)
+        thead
+          tr
+            -days.each do |day|
+              th= day.upcase
+        tbody
+          -x = 0
+          -@watering_days[:count].times do ||
+            tr
+              -days.each do |day|
+                td
+                  -if @watering_days[day.to_sym].count >= x+1
+                   =link_to "#{@watering_days[day.to_sym][x]}", spigot_watering_path(spigot_id: @spigot, id: @watering_days[day.to_sym][x+1])
+                  -else
+                    =""
+            -x += 2      
+
+                  
+    =link_to "Schedule new Watering", new_spigot_watering_path(spigot_id: @spigot)
+
   div class= 'col-md-3'
     h1= "Weather for #{Time.now.month}/#{Time.now.day}"
-    h3= "Chance of Rain = #{@weather.precip_chance}%"
+    h3= "Chance of Rain: #{@weather.precip_chance}%"
+    h3= "Predicted High: #{@weather.temp_max}°F"
+    h3= "Predicted Low: #{@weather.temp_min}°F"
