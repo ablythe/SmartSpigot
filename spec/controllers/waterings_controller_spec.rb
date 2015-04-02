@@ -20,6 +20,27 @@ it "can show a watering" do
 end
 
 it "can edit a watering" do
+  watering = FactoryGirl.create :watering, spigot: @spigot
+  expect(watering.monday).to eq true
+  expect(watering.saturday).to eq false
+  params = {
+    spigot_id: @spigot,
+    id: watering,
+    watering: {
+      start_time: watering.start_time ,
+      end_time: watering.end_time,
+      monday: false,
+      tuesday: watering.tuesday,
+      wednesday: watering.wednesday,
+      thursday: watering.thursday,
+      friday: watering.friday,
+      saturday: true,
+      sunday: watering.sunday
+      }}
+  patch :update, params
+  updated_watering = Watering.find(watering.id)
+  expect(updated_watering.monday).to eq false
+  expect(updated_watering.saturday).to eq true
   end
 
 end

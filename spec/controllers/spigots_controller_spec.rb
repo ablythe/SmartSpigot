@@ -9,7 +9,12 @@ RSpec.describe SpigotsController, type: :controller do
   it "can create a new controller" do
     get :new
     expect(response.code.to_i).to eq 200
-    post :create, name: "Spigot1", isp: "1.1.0"
+    params = {spigot:
+      {name: "Spigot1",
+        isp: "1.1.0"
+      }
+    }
+    post :create, params
     expect(@user.spigots.count).to eq 1
     expect(response.code.to_i).to eq 302
   end
@@ -27,9 +32,10 @@ RSpec.describe SpigotsController, type: :controller do
   end
 
   it "knows when a spigot has waterings" do
+    
   end
 
-  if "knows when a spigot doesn't have waterings" do
+  it "knows when a spigot doesn't have waterings" do
   end
 
   it "knows a spigot's city" do

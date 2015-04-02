@@ -4,10 +4,12 @@ div class="row"
       caption Spigots
       thead 
         tr
-          td Name
-          td Location
+          th Name
+          th Location
       tbody
         -@spigots.each do |spigot|
           tr
-            td spigot.name
-            td spigot.location
+            td
+              a href=spigot_path(id:spigot) =spigot.name
+            td=spigot.location
+
