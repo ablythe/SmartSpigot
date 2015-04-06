@@ -8,6 +8,7 @@ class GardenerWorker
     spigots =Spigot.all
     spigots.each do |spigot|
       weather= spigot.get_days_weather
+      spigot.get_usage
       unless weather.precip_chance >= spigot.threshold
         if spigot.on?
           spigot.change_state? 'off', 'end_time'

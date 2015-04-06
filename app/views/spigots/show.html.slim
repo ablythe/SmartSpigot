@@ -28,6 +28,7 @@ div class="row"
     =link_to "Schedule new Watering", new_spigot_watering_path(spigot_id: @spigot)
     div class= 'row'
       h3 Usage History
+        
   div class= 'col-md-3'
     h1= "Weather for #{Time.now.month}/#{Time.now.day}"
     h3= "Chance of Rain: #{@weather.precip_chance}%"

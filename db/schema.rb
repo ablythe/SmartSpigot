@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150402171444) do
+ActiveRecord::Schema.define(version: 20150406181433) do
 
   create_table "spigots", force: :cascade do |t|
     t.string   "name"
@@ -32,6 +32,23 @@ ActiveRecord::Schema.define(version: 20150402171444) do
   end
 
   add_index "spigots", ["user_id"], name: "index_spigots_on_user_id"
+
+  create_table "usages", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "spigot_id"
+    t.integer  "minutes"
+    t.integer  "overrides"
+    t.integer  "avg_temp"
+    t.string   "wday"
+    t.integer  "day"
+    t.integer  "month"
+    t.integer  "year"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "usages", ["spigot_id"], name: "index_usages_on_spigot_id"
+  add_index "usages", ["user_id"], name: "index_usages_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

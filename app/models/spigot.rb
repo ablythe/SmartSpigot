@@ -2,6 +2,7 @@ class Spigot < ActiveRecord::Base
   belongs_to :user
   has_many :waterings
   has_many :weather_apis
+  has_many :usages
   geocoded_by :address
   after_validation :geocode
 
@@ -72,7 +73,21 @@ class Spigot < ActiveRecord::Base
     update state: false
   end
 
-  
+  def daily_water_usage limit=nil
+    number = limit || usages.count
+    data =usages.order(created_at: :desc).limit(number)
+    gallons = {total: 0}
+    data.each do |d|
+      date = "#{d.month}/#{d.day}/#{d.year}"
+      gallons[date] = d.water_used
+      gallons[:total] += d.water_used
+    end
+    gallons
+  end
+
+  def get_usage
+    usages.where("created_at > ?", Time.now.midnight.utc).first_or_create!
+  end
 
   private
 
