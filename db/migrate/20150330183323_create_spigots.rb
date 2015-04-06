@@ -12,7 +12,7 @@ class CreateSpigots < ActiveRecord::Migration
       t.string :state
       t.string :country
       t.integer :threshold
-      t.boolean :on
+      t.boolean :state
       t.datetime :user_overriden
       t.belongs_to :user, index: true
 

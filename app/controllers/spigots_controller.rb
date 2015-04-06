@@ -19,8 +19,8 @@ class SpigotsController < ApplicationController
 
   def show
     @spigot =Spigot.find(params['id'])
-    @status = @spigot.on ? "On" : "Off"
-    @weather =@spigot.get_days_weather
+    @status = @spigot.state ? "On" : "Off"
+    @weather =@spigot.access_days_weather
     @watering_days =@spigot.get_watering_schedule
   end
 

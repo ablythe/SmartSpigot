@@ -22,10 +22,9 @@ ActiveRecord::Schema.define(version: 20150402171444) do
     t.string   "zipcode"
     t.string   "street_address"
     t.string   "city"
-    t.string   "state"
+    t.boolean  "state"
     t.string   "country"
     t.integer  "threshold"
-    t.boolean  "on"
     t.datetime "user_overriden"
     t.integer  "user_id"
     t.datetime "created_at",     null: false

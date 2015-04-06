@@ -9,15 +9,11 @@ class Spigot < ActiveRecord::Base
     "#{street_address}, #{city}, #{state}, #{country}"
   end
 
-  def get_days_weather
-    weather = weather_apis.where("created_at > ?", Time.now.midnight).first
-    unless weather
-      weather = store_days_weather
-    end
-    weather
+  def access_days_weather
+    weather = weather_apis.where("created_at > ?", Time.now.midnight.utc).first || fetch_days_weather
   end
 
-  def store_days_weather 
+  def fetch_days_weather 
     response =WeatherApi.current_forecast latitude, longitude
     data = WeatherApi.parse_data response
     weather_apis.create!(data)
@@ -68,10 +64,12 @@ class Spigot < ActiveRecord::Base
 
   def on
     HTTParty.get("http://#{ip}:70/L")
+    update state:true
   end
 
   def off
     HTTParty.get("http://#{ip}:70/H")
+    update state: false
   end
 
   
