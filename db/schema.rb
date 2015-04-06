@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20150402171444) do
 
   create_table "spigots", force: :cascade do |t|
     t.string   "name"
-    t.string   "isp"
+    t.string   "ip"
     t.string   "location"
     t.float    "latitude"
     t.float    "longitude"

@@ -50,6 +50,8 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'zip-codes'
 gem 'geocoder'
+gem 'sidekiq'
+gem 'sidetiq'
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'

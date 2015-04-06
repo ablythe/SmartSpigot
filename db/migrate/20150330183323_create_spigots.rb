@@ -2,7 +2,7 @@ class CreateSpigots < ActiveRecord::Migration
   def change
     create_table :spigots do |t|
       t.string :name
-      t.string :isp
+      t.string :ip
       t.string :location
       t.float  :latitude
       t.float  :longitude

@@ -6,7 +6,7 @@ class SpigotsController < ApplicationController
   def create
     @spigot = current_user.spigots.create(
       name: params['spigot'][:name], 
-      isp: params['spigot']['isp'], 
+      ip: params['spigot']['ip'], 
       location: params['spigot']["location"], 
       street_address: params['spigot']['street_address'],
       city: params['spigot']['city'],
