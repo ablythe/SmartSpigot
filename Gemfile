@@ -53,6 +53,7 @@ gem 'geocoder'
 gem 'sidekiq'
 gem 'sidetiq'
 gem 'redis-rails'
+
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
