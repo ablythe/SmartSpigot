@@ -32,6 +32,10 @@ RSpec.describe Usage, type: :model do
   end
 
   it "can display usage by weeks" do
+    s= FactoryGirl.create :spigot
+    FactoryGirl.create :usage, day: 16, month: 3, year: 2015, spigot:s
+    water_data =s.daily_water_usage
+    expect(water_data["3/16/2015"]).to eq 4224
   end
 
   it "can display usage by month" do

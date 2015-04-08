@@ -7,12 +7,12 @@ class SpigotsController < ApplicationController
     @spigot = current_user.spigots.create(
       name: params['spigot'][:name], 
       ip: params['spigot']['ip'], 
-      location: params['spigot']["location"], 
       street_address: params['spigot']['street_address'],
       city: params['spigot']['city'],
       state: params['spigot']['state'],
       country: params['spigot']['country'],
-      zipcode: params['spigot']["zipcode"]
+      zipcode: params['spigot']["zipcode"],
+      timezone: params["spigot"]['timezone']
       )
     redirect_to spigot_path @spigot
   end

@@ -7,9 +7,12 @@ class WateringsController < ApplicationController
   def create
     @spigot = Spigot.find(params['spigot_id'])
     data = params['watering']
+    start_time = Time.new(2000, 1, 1,data['start_time(4i)'], data['start_time(5i)'])
+    end_time = Time.new(2000,1,1,data['end_time(4i)'], data['end_time(5i)'])
     @spigot.waterings.create( 
-      start_time: Watering.to_utc(data['start_time(4i)'], data['start_time(5i)']), 
-      end_time: Watering.to_utc(data['end_time(4i)'], data['end_time(5i)']),
+      start_time: start_time, 
+      end_time: end_time,
+      duration: end_time - start_time,
       monday: data['monday'],
       tuesday: data['tuesday'],
       wednesday: data['wednesday'],

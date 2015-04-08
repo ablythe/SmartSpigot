@@ -6,6 +6,9 @@ class Watering < ActiveRecord::Base
   end
 
   def self.to_utc hour, minute
-    time = Time.new(2000,1,1, hour, minute).utc
+    time = Time.now(2000,1,1, hour, minute)
   end
+
+
+
 end

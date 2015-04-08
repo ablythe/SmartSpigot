@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20150406181433) do
     t.string   "name"
     t.string   "ip"
     t.string   "location"
+    t.string   "timezone"
     t.float    "latitude"
     t.float    "longitude"
     t.string   "zipcode"
@@ -74,6 +75,7 @@ ActiveRecord::Schema.define(version: 20150406181433) do
     t.integer  "spigot_id"
     t.time     "start_time"
     t.time     "end_time"
+    t.integer  "duration"
     t.boolean  "monday",     default: false, null: false
     t.boolean  "tuesday",    default: false, null: false
     t.boolean  "wednesday",  default: false, null: false

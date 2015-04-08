@@ -4,6 +4,7 @@ class CreateWaterings < ActiveRecord::Migration
       t.belongs_to :spigot, index: true
       t.time :start_time
       t.time :end_time
+      t.integer  :duration
       t.boolean :monday, null:false, default:false
       t.boolean :tuesday, null:false, default:false
       t.boolean :wednesday, null:false, default:false

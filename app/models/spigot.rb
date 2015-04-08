@@ -47,14 +47,33 @@ class Spigot < ActiveRecord::Base
     schedule
   end
 
-  def change_state? new_state, time
+  def turn_on? 
     weekday = get_day
-    end_times = waterings.where("#{weekday}": true).map {|w| w[time]}
-    end_times.each do |t|
+    waters = waterings.where("#{weekday}": true).all
+    waters.each do |water|
+      t = water.start_time
+      Time.zone = timezone
+      hour =Time.now.hour
+      minute = Time.now.min
+      if hour == t.getlocal.hour && minute == t.getlocal.min
+        # self.on
+        usage = get_usage
+        usage.minutes += water.duration
+        usage.save!
+      end
+    end
+  end
+
+  def turn_off? 
+    weekday = get_day
+    waters = waterings.where("#{weekday}": true).all
+    waters.each do |water|
+      t = water.end_time
       hour =Time.now.utc.hour
       minute = Time.now.utc.min
       if hour == t.hour && minute == t.min
-        self.send(new_state)
+        self.off
+        return water.id
       end
     end
   end
@@ -63,7 +82,7 @@ class Spigot < ActiveRecord::Base
     weekday = Time.now.getlocal.strftime('%A').downcase
   end
 
-  def on
+  def on 
     HTTParty.get("http://#{ip}:70/L")
     update state:true
   end
@@ -73,7 +92,7 @@ class Spigot < ActiveRecord::Base
     update state: false
   end
 
-  def daily_water_usage limit=nil
+  def water_usage limit=nil, scope
     number = limit || usages.count
     data =usages.order(created_at: :desc).limit(number)
     gallons = {total: 0}
@@ -86,7 +105,22 @@ class Spigot < ActiveRecord::Base
   end
 
   def get_usage
-    usages.where("created_at > ?", Time.now.midnight.utc).first_or_create!
+    useage_data = usages.where("created_at > ?", Time.now.midnight.utc).first
+    unless useage_data
+      today = get_day
+      watering_data = waterings.where("#{today}": true)
+      seconds = 0
+      watering_data.each { |w| seconds += w.end_time - w.start_time }
+      usages.create(
+        minutes: seconds/60, 
+        overrides: 0, 
+        wday: today, 
+        day: Time.now.day,
+        month: Time.now.month,
+        year: Time.now.year
+        )
+    end
+    useage_data
   end
 
   private

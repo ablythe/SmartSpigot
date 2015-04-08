@@ -7,5 +7,36 @@ GPM = 12
 def water_used
   minutes * GPM
 end
-  
+
+def self.usage_by_month spigot
+  data ={}
+  (1..12).each do |x|
+    data[x] =spigot.usages.where(month: x)
+  end
+  data
+end
+
+def self.usage_by_week spigot
+  data ={}
+  num = 1
+  gallons = 0
+  minutes = 0
+  overrides = 0
+  uses =spigot.usages.all
+  uses.each do |u|
+    unless u.week == "Sunday"
+      minutes += u.minutes
+      overrides += u.overrides
+    else
+      data["Week #{num}"]["minutes"] = minutes
+      data["Week #{num}"]["gallons"] = minutes * GPM
+      data["Week #{num}"]["overrides"] = overrides
+      gallons = 0
+      minutes = 0
+      overrides = 0
+      num += 1
+    end
+  end
+end
+
 end

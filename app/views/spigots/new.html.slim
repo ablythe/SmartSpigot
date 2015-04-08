@@ -6,9 +6,6 @@
     =s.label :ip
     =s.text_field :ip
   div class="form-group"
-    =s.label :location, "Nickname: "
-    =s.text_field :name
-  div class="form-group"
     =s.label :street_address, "Street Address: "
     =s.text_field :street_address
   div class="form-group"
@@ -23,4 +20,7 @@
   div class="form-group"
     =s.label :zipcode, "Zipcode: "
     =s.text_field :zipcode
+  div class="form-group"
+    =s.label :timezone, "Time Zone"
+    =s.time_zone_select :timezone
   =s.submit
