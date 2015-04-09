@@ -39,4 +39,20 @@ def self.usage_by_week spigot
   end
 end
 
+def self.get_chart_data spigot_id
+  spigot = Spigot.find(spigot_id)
+  uses = spigot.usages.all
+  dates = []
+  minutes = []
+  uses.each do |u|
+    dates.push "#{u.month}/#{u.day}/#{u.year}"
+    minutes.push u.minutes
+  end
+  data ={
+    labels: dates,
+    data: minutes
+  }
+  end
+
+
 end

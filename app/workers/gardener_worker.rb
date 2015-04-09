@@ -10,14 +10,11 @@ class GardenerWorker
       weather = spigot.get_days_weather
       todays_use = spigot.get_usage
       unless weather.precip_chance >= spigot.threshold
-        if spigot.on?
-          changed = spigot.change_state? 'off', 'end_time'
+        if spigot.status == "On"
+          spigot.turn_off?
         else
-          changed = spigot.change_state? 'on', 'start_time'
+          spigot.turn_on?
         end
-        if changed
-          Usage.duration data
-
       else
         todays_use.overrides += 1
         todays_use.save!

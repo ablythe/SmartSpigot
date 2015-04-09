@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :spigots do
     resources :waterings, only: [:new, :create, :show, :update, :destroy]
-    post "/usages", to: "usages#data"
+    get "/usages", to: "usages#data"
   end
 
 end

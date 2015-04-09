@@ -58,7 +58,7 @@ class Spigot < ActiveRecord::Base
       if hour == t.getlocal.hour && minute == t.getlocal.min
         # self.on
         usage = get_usage
-        usage.minutes += water.duration
+        usage.minutes += (water.duration / 60)
         usage.save!
       end
     end
@@ -69,11 +69,11 @@ class Spigot < ActiveRecord::Base
     waters = waterings.where("#{weekday}": true).all
     waters.each do |water|
       t = water.end_time
-      hour =Time.now.utc.hour
-      minute = Time.now.utc.min
-      if hour == t.hour && minute == t.min
+      Time.zone = timezone
+      hour =Time.now.hour
+      minute = Time.now.min
+      if hour == t.getlocal.hour && minute == t.getlocal.min
         self.off
-        return water.id
       end
     end
   end
@@ -84,12 +84,12 @@ class Spigot < ActiveRecord::Base
 
   def on 
     HTTParty.get("http://#{ip}:70/L")
-    update state:true
+    update status:"On"
   end
 
   def off
     HTTParty.get("http://#{ip}:70/H")
-    update state: false
+    update status: "Off"
   end
 
   def water_usage limit=nil, scope

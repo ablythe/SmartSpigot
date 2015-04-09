@@ -26,10 +26,11 @@ ActiveRecord::Schema.define(version: 20150406181433) do
     t.boolean  "state"
     t.string   "country"
     t.integer  "threshold"
+    t.string   "status",         default: "Off", null: false
     t.datetime "user_overriden"
     t.integer  "user_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   add_index "spigots", ["user_id"], name: "index_spigots_on_user_id"
