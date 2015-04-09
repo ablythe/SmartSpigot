@@ -3,10 +3,10 @@ h2 Create a new Watering
 =form_for @watering, url: spigot_waterings_path, html: {class: "form"} do |w|
   div class= "form-group"
     =w.label :start_time
-    =w.time_select :start_time, ampm:true
+    =w.time_select :start_time, ampm:true, minute_step: 15, default: {hour: 12}
   div class= "form-group"
     =w.label :end_time
-    =w.time_select :end_time, ampm:true
+    =w.time_select :end_time, ampm:true, minute_step: 15, default: {hour: 12}
   -days = %w(monday tuesday wednesday thursday friday saturday sunday)
   -days.each do |d|
     div class="form-group"

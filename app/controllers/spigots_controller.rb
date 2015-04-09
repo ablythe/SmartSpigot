@@ -12,7 +12,8 @@ class SpigotsController < ApplicationController
       state: params['spigot']['state'],
       country: params['spigot']['country'],
       zipcode: params['spigot']["zipcode"],
-      timezone: params["spigot"]['timezone']
+      timezone: params["spigot"]['timezone'],
+      threshold: params['spigot']['threshold']
       )
     redirect_to spigot_path @spigot
   end

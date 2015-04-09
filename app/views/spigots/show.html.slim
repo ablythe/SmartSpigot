@@ -1,68 +1,77 @@
-
-div class="row"
+div class='container'
   div class='col-md-9'
-    div class= 'row'
-      h1= "Spigot: #{@spigot.name}"
-      h3= "City: #{@spigot.city}"
-      h3= "Status: #{@status}"
-    div clss='row'
-      table class='table'
-        -days =%w(monday tuesday wednesday thursday friday saturday sunday)
-        thead
-          tr
-            -days.each do |day|
-              th= day.upcase
-        tbody
-          -x = 0
-          -@watering_days[:count].times do ||
-            tr
-              -days.each do |day|
-                td
-                  -if @watering_days[day.to_sym].count >= x+1
-                   =link_to "#{@watering_days[day.to_sym][x]}", spigot_watering_path(spigot_id: @spigot, id: @watering_days[day.to_sym][x+1])
-                  -else
-                    =""
-            -x += 2      
+    div class='panel panel-primary'
+      div class= 'panel-heading'
+        div class='panel-title'= "Spigot: #{@spigot.name}"
+      div class='panel-body'
+        h3= "City: #{@spigot.city}"
+        h3= "Status: #{@status}"
+        h3= "Rain Threshold: #{@spigot.threshold}%"
+        div class='row'
+          table class='table table-striped'
+            -days =%w(monday tuesday wednesday thursday friday saturday sunday)
+            thead
+              tr
+                -days.each do |day|
+                  th= day.upcase
+            tbody
+              -x = 0
+              -@watering_days[:count].times do ||
+                tr
+                  -days.each do |day|
+                    td
+                      -if @watering_days[day.to_sym].count >= x+1
+                       =link_to "#{@watering_days[day.to_sym][x]}", spigot_watering_path(spigot_id: @spigot, id: @watering_days[day.to_sym][x+1])
+                      -else
+                        ="             "
+                -x += 2      
+    div class= 'row' 
+      div class= 'panel panel-warning' 
+        div class='panel-heading'
+          div class='panel-title' Usage History
+        div class='panel-body'
+          canvas id="myChart" width="500" height="300" style="background-color: white;"
+              javascript:
+                var chart_data, myLineChart
+                var spigot = "#{@spigot.id}";
+                var ctx = document.getElementById("myChart").getContext("2d");
+                var options = {
+                  scaleGridLineColor : "rgba(2, 44, 236, 0.8)",
+                }
 
-                  
-    =link_to "Schedule new Watering", new_spigot_watering_path(spigot_id: @spigot)
-    div class= 'row'
-      h3 Usage History
-      canvas id="myChart" width="600" height="400"
-          javascript:
-            var chart_data, myLineChart
-            var spigot = "#{@spigot.id}";
-            var ctx = document.getElementById("myChart").getContext("2d");
+                $.ajax( "/spigots/" + spigot +"/usages", {
+                  method: "GET",
+                  success: function(data){
+                    console.log(data)
+                    chart_data ={
+                      labels: data.data.labels,
+                      datasets: [
+                        {
+                          label: "Water Usage in Minutes",
+                          fillColor: "rgba(220,220,220,0.2)",
+                          strokeColor: "rgba(213, 44, 44, 1)",
+                          pointColor: "color: rgba(2, 0, 0, 1)",
+                          pointStrokeColor: "#000",
+                          pointHighlightFill: "#000",
+                          pointHighlightStroke: "rgba(220,220,220,1)",
+                          data: data.data.data
+                          }      
+                         ]
+                    };
 
-            $.ajax( "/spigots/" + spigot +"/usages", {
-              method: "GET",
-              success: function(data){
-                console.log(data)
-                chart_data ={
-                  labels: data.data.labels,
-                  datasets: [
-                    {
-                      label: "Water Usage in Minutes",
-                      fillColor: "rgba(220,220,220,0.2)",
-                      strokeColor: "rgba(220,220,220,1)",
-                      pointColor: "rgba(220,220,220,1)",
-                      pointStrokeColor: "#fff",
-                      pointHighlightFill: "#fff",
-                      pointHighlightStroke: "rgba(220,220,220,1)",
-                      data: data.data.data
-                      }      
-                    ]
-                };
-                
-                myLineChart = new Chart(ctx).Line(chart_data);
-              }
-            });
-
-            
-            
+                    myLineChart = new Chart(ctx).Line(chart_data, options);
+                  }
+                });
+          h5 Minutes of Watering per day
+              
+              
 
   div class= 'col-md-3'
-    h1= "Weather for #{Time.now.month}/#{Time.now.day}"
-    h3= "Chance of Rain: #{@weather.precip_chance}%"
-    h3= "Predicted High: #{@weather.temp_max}°F"
-    h3= "Predicted Low: #{@weather.temp_min}°F"
+    div class='panel panel-info'
+      div class= 'panel-heading'
+        h1 class='panel-title'= "Weather for #{Time.now.month}/#{Time.now.day}"
+      div class='panel-body'
+        h4="Chance of Rain: #{@weather.precip_chance}%"
+        h4="Predicted High: #{@weather.temp_max}°F"
+        h4="Predicted Low: #{@weather.temp_min}°F"
+    =link_to "Schedule a new watering", new_spigot_watering_path(spigot_id: @spigot), class:"btn btn-success btn-lg"

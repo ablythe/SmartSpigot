@@ -1,9 +1,10 @@
-div class="row"
-  div class="col-md-2"
-  div class="col-md-8"
-    h1 Welcome to Smart Spigot
-    div class='row'
-      div class='col-md-12'
-        -if user_signed_in?
-          a class="button" href='spigots/new' Register a new spigot 
-  div class="col-md-2"
+div class="container-fluid"
+  div class="row"
+    div class="col-md-4"
+    div class="col-md-4"
+      h1 Welcome to Smart Spigot
+    div class="col-md-4" 
+  div class='row'
+    div class="col-md-12"
+      -if user_signed_in?
+        a href="spigots/new" class="btn btn-success btn-lg btn-block" Register a new Spigot

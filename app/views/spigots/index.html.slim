@@ -5,11 +5,11 @@ div class="row"
       thead 
         tr
           th Name
-          th Location
+          th Status
       tbody
         -@spigots.each do |spigot|
           tr
             td
               a href=spigot_path(id:spigot) =spigot.name
-            td=spigot.location
+            td=spigot.status
 
