@@ -1,22 +1,26 @@
-h3 = "Start Time: #{@start_time}"
-h3 ="End Time: #{@end_time}"
-table class="table"
-  thead
-    tr
-      th Monday
-      th Tuesday
-      th Wednesday
-      th Thursday
-      th Friday
-      th Saturday
-      th Sunday
-  tbody
-    tr
-      -days = %w(monday tuesday wednesday thursday friday saturday sunday)
-      -days.each do |day|
-        -if @watering[day] == true
-          td 
-            span class="glyphicon glyphicon-ok" aria-hidden="true"
-        -else
-          td
-            span class="glyphicon glyphicon-remove" aria-hidden="true"
+div class="container"
+
+  h3 = "Start Time: #{@start_time}"
+  h3 ="End Time: #{@end_time}"
+  table class="table table-bordered"
+    thead
+      tr
+        th Monday
+        th Tuesday
+        th Wednesday
+        th Thursday
+        th Friday
+        th Saturday
+        th Sunday
+    tbody
+      tr
+        -days = %w(monday tuesday wednesday thursday friday saturday sunday)
+        -days.each do |day|
+          -if @watering[day] == true
+            td 
+              span class="glyphicon glyphicon-ok" aria-hidden="true"
+          -else
+            td
+              span class="glyphicon glyphicon-remove" aria-hidden="true"
+
+  =button_to "Delete Watering", { action: "destroy", spigot_id: params['spigot_id'], id: @watering }, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger"

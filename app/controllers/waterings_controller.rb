@@ -46,4 +46,9 @@ class WateringsController < ApplicationController
       ) 
     redirect_to spigot_watering_path, spigot_id: @spigot, id: @watering
   end
+
+  def destroy
+    Watering.find(params['id']).delete
+    redirect_to spigot_path id: params['spigot_id']
+  end
 end

@@ -23,7 +23,7 @@ div class='container'
                       -if @watering_days[day.to_sym].count >= x+1
                        =link_to "#{@watering_days[day.to_sym][x]}", spigot_watering_path(spigot_id: @spigot, id: @watering_days[day.to_sym][x+1])
                       -else
-                        ="             "
+                        ="_________________"
                 -x += 2      
     div class= 'row' 
       div class= 'panel panel-warning' 
