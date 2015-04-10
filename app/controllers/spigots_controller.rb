@@ -29,4 +29,10 @@ class SpigotsController < ApplicationController
     @spigots = current_user.spigots.all
   end
 
+  def update
+    @spigot =Spigot.find(params['id'])
+    @spigot.update! name: params["spigot"]['name'], threshold: params['spigot']['threshold']
+    redirect_to :back, alert:"Spigot Updated"
+  end
+
 end

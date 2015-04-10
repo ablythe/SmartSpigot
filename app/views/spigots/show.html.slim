@@ -8,7 +8,8 @@ div class='container'
         h3= "Status: #{@status}"
         h3= "Rain Threshold: #{@spigot.threshold}%"
         div class='row'
-          table class='table table-striped'
+    h4 Schedule
+    table class='table table-bordered'
             -days =%w(monday tuesday wednesday thursday friday saturday sunday)
             thead
               tr
@@ -24,7 +25,7 @@ div class='container'
                        =link_to "#{@watering_days[day.to_sym][x]}", spigot_watering_path(spigot_id: @spigot, id: @watering_days[day.to_sym][x+1])
                       -else
                         ="_________________"
-                -x += 2      
+                -x += 2            
     div class= 'row' 
       div class= 'panel panel-warning' 
         div class='panel-heading'
@@ -75,3 +76,15 @@ div class='container'
         h4="Predicted High: #{@weather.temp_max}°F"
         h4="Predicted Low: #{@weather.temp_min}°F"
     =link_to "Schedule a new watering", new_spigot_watering_path(spigot_id: @spigot), class:"btn btn-success btn-lg"
+    br
+    br
+    =form_for @spigot, method: 'PATCH', html: {class:"form"} do |f|
+      legend Edit Spigot
+      div class="form-group"
+        =f.label :name, class: "col-md-4 control-label"
+        =f.text_field :name
+      div class="form-group"
+        =f.label :threshold, class: "col-md-4 control-label"
+        =f.text_field :threshold
+      =f.submit class: "btn btn-sucess"
+
