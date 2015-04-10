@@ -9,11 +9,14 @@ div class='container'
           h3= "Status: #{@status}"
           h3= "Rain Threshold: #{@spigot.threshold}%"
         div class="col-md-4"
+          br
+          br
+          br
           div class="btn-group" role="group" aria-label="On and Off"
             -if @spigot.status == "On"
-              =link_to "Off", {action: "off",spigot_id: @spigot.id}, method: :patch, type: "button",class: "btn btn-danger"
+              =link_to "Off", {action: "off",spigot_id: @spigot.id}, method: :patch, type: "button",class: "btn btn-danger btn-lg"
             -else
-              =link_to "On", {action: "on", spigot_id: @spigot.id}, method: :patch, type: "button", class: "btn btn-success" 
+              =link_to "On", {action: "on", spigot_id: @spigot.id}, method: :patch, type: "button", class: "btn btn-success btn-lg" 
             
 
         div class='row'
@@ -40,16 +43,44 @@ div class='container'
         div class='panel-heading'
           div class='panel-title' Usage History
         div class='panel-body'
-          canvas id="myChart" width="500" height="300" style="background-color: white;"
-              javascript:
-                var chart_data, myLineChart
-                var spigot = "#{@spigot.id}";
-                var ctx = document.getElementById("myChart").getContext("2d");
-                var options = {
-                  scaleGridLineColor : "rgba(2, 44, 236, 0.8)",
-                }
+          div class="col-md-4"
+            h5 Minutes of Watering per day
+            canvas id="myChart" width="300" height="300" style="background-color: white;"
+          div class="col-md-2"
+          div class='col-md-4'
+            h5 Gallons used per month
+            canvas id="secondChart" width="300" height="300" style="background-color: white;"
+                javascript:
+                  var chart_data, myLineChart
+                  var spigot = "#{@spigot.id}";
+                  var ctx = document.getElementById("myChart").getContext("2d");
+                  
 
-                $.ajax( "/spigots/" + spigot +"/usages", {
+                  $.ajax( "/spigots/" + spigot +"/usages", {
+                    method: "GET",
+                    success: function(data){
+                      chart_data ={
+                        labels: data.data.labels,
+                        datasets: [
+                          {
+                            label: "Water Usage in Minutes",
+                            fillColor: "rgba(220,220,220,0.2)",
+                            strokeColor: "rgba(213, 44, 44, 1)",
+                            pointColor: "color: rgba(2, 0, 0, 1)",
+                            pointStrokeColor: "#000",
+                            pointHighlightFill: "#000",
+                            pointHighlightStroke: "rgba(220,220,220,1)",
+                            data: data.data.data
+                            }      
+                           ]
+                      };
+
+                      myLineChart = new Chart(ctx).Line(chart_data);
+                    }
+                  });
+                  var chart_data, myBarChart;
+                  var barctx = document.getElementById("secondChart").getContext("2d");
+                  $.ajax( "/spigots/" + spigot +"/gallons", {
                   method: "GET",
                   success: function(data){
                     console.log(data)
@@ -57,23 +88,21 @@ div class='container'
                       labels: data.data.labels,
                       datasets: [
                         {
-                          label: "Water Usage in Minutes",
-                          fillColor: "rgba(220,220,220,0.2)",
-                          strokeColor: "rgba(213, 44, 44, 1)",
-                          pointColor: "color: rgba(2, 0, 0, 1)",
-                          pointStrokeColor: "#000",
-                          pointHighlightFill: "#000",
-                          pointHighlightStroke: "rgba(220,220,220,1)",
-                          data: data.data.data
-                          }      
-                         ]
+                          label: "Water Usage in Gallons",
+                          fillColor: "rgba(151,187,205,0.5)",
+                          strokeColor: "rgba(151,187,205,0.8)",
+                          highlightFill: "rgba(151,187,205,0.75)",
+                          highlightStroke: "rgba(151,187,205,1)",
+                          data: data.data.numbers
+                        }      
+                      ]
                     };
 
-                    myLineChart = new Chart(ctx).Line(chart_data, options);
-                  }
-                });
-          h5 Minutes of Watering per day
-              
+                    myBarChart = new Chart(barctx).Bar(chart_data);
+                    }
+                  }); 
+            
+               
               
 
   div class= 'col-md-3'
