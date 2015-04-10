@@ -135,4 +135,5 @@ class Spigot < ActiveRecord::Base
     max/2
   end
 
+
 end

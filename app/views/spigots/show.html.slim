@@ -4,9 +4,18 @@ div class='container'
       div class= 'panel-heading'
         div class='panel-title'= "Spigot: #{@spigot.name}"
       div class='panel-body'
-        h3= "City: #{@spigot.city}"
-        h3= "Status: #{@status}"
-        h3= "Rain Threshold: #{@spigot.threshold}%"
+        div class="col-md-8"
+          h3= "City: #{@spigot.city}"
+          h3= "Status: #{@status}"
+          h3= "Rain Threshold: #{@spigot.threshold}%"
+        div class="col-md-4"
+          div class="btn-group" role="group" aria-label="On and Off"
+            -if @spigot.status == "On"
+              =link_to "Off", {action: "off",spigot_id: @spigot.id}, method: :patch, type: "button",class: "btn btn-danger"
+            -else
+              =link_to "On", {action: "on", spigot_id: @spigot.id}, method: :patch, type: "button", class: "btn btn-success" 
+            
+
         div class='row'
     h4 Schedule
     table class='table table-bordered'

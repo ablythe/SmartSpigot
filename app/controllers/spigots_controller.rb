@@ -20,7 +20,7 @@ class SpigotsController < ApplicationController
 
   def show
     @spigot =Spigot.find(params['id'])
-    @status = @spigot.state ? "On" : "Off"
+    @status = @spigot.status
     @weather =@spigot.access_days_weather
     @watering_days =@spigot.get_watering_schedule
   end
@@ -33,6 +33,18 @@ class SpigotsController < ApplicationController
     @spigot =Spigot.find(params['id'])
     @spigot.update! name: params["spigot"]['name'], threshold: params['spigot']['threshold']
     redirect_to :back, alert:"Spigot Updated"
+  end
+
+  def on
+    @spigot = Spigot.find(params['spigot_id'])
+    @spigot.update! status: "On"
+    redirect_to :back, alert: "Spigot Turned On"
+  end
+
+  def off
+    @spigot = Spigot.find(params['spigot_id'])
+    @spigot.update! status: "Off"
+    redirect_to :back, alert: "Spigot Turned Off"
   end
 
 end

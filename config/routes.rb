@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :spigots do
     resources :waterings, only: [:new, :create, :show, :update, :destroy]
     get "/usages", to: "usages#data"
+    patch "/on", to: "spigots#on"
+    patch "/off", to: "spigots#off"
   end
 
 end
