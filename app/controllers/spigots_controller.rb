@@ -47,4 +47,11 @@ class SpigotsController < ApplicationController
     redirect_to :back, alert: "Spigot Turned Off"
   end
 
+  def status
+    @spigot = Spigot.find(params['spigot_id'])
+    render json: {
+      status: @spigot.status
+    }
+  end
+
 end

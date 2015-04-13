@@ -1,3 +1,5 @@
+input id= "spigotId" type="hidden" value="#{@spigot.id}"
+input id="spigotStatus"  type="hidden" value="#{@status}"
 div class='container'
   div class='col-md-9'
     div class='panel panel-primary'
@@ -14,9 +16,9 @@ div class='container'
           br
           div class="btn-group" role="group" aria-label="On and Off"
             -if @spigot.status == "On"
-              =link_to "Off", {action: "off",spigot_id: @spigot.id}, method: :patch, type: "button",class: "btn btn-danger btn-lg"
+              =link_to "Turn Off", {action: "off",spigot_id: @spigot.id}, method: :patch, type: "button",class: "btn btn-danger btn-lg"
             -else
-              =link_to "On", {action: "on", spigot_id: @spigot.id}, method: :patch, type: "button", class: "btn btn-success btn-lg" 
+              =link_to "Turn On", {action: "on", spigot_id: @spigot.id}, method: :patch, type: "button", class: "btn btn-success btn-lg" 
     div class="panel panel-primary"
       div class='panel-heading'
         div class='panel-title'= "Schedule"
