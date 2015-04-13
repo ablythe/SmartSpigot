@@ -2,7 +2,7 @@ class GardenerWorker
   include Sidekiq::Worker
   include Sidetiq::Schedulable
 
-  recurrence {minutely.second_of_minute(0,30)}
+  recurrence {minutely.second_of_minute(30)}
 
   def perform
     spigots = Spigot.all
