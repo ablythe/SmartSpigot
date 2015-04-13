@@ -53,8 +53,8 @@ class Spigot < ActiveRecord::Base
     waters.each do |water|
       t = water.start_time
       Time.zone = timezone
-      hour =Time.now.hour
-      minute = Time.now.min
+      hour =Time.zone.now.hour
+      minute = Time.zone.now.min
       if hour == t.getlocal.hour && minute == t.getlocal.min
         usage = get_usage
         if not_rainy?
