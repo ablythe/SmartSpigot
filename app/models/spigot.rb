@@ -56,10 +56,16 @@ class Spigot < ActiveRecord::Base
       hour =Time.now.hour
       minute = Time.now.min
       if hour == t.getlocal.hour && minute == t.getlocal.min
-        self.on
         usage = get_usage
-        usage.minutes += (water.duration / 60)
-        usage.save!
+        if not_rainy?
+          self.on
+          usage.minutes += (water.duration / 60)
+          usage.save!
+        else
+          usage.water_saved += (water.duration / 60)
+          usage.overrides += 1
+          usage.save!
+        end
       end
     end
   end
@@ -105,22 +111,20 @@ class Spigot < ActiveRecord::Base
   end
 
   def get_usage
-    useage_data = usages.where("created_at > ?", Time.now.midnight.utc).first
-    unless useage_data
-      today = get_day
-      watering_data = waterings.where("#{today}": true)
-      seconds = 0
-      watering_data.each { |w| seconds += w.end_time - w.start_time }
-      usages.create(
-        minutes: 0, 
-        overrides: 0, 
-        wday: today, 
-        day: Time.now.day,
-        month: Time.now.month,
-        year: Time.now.year
-        )
-    end
-    useage_data
+    usages.where("created_at > ?", Time.now.midnight.utc).first_or_create!(
+      minutes: 0, 
+      water_saved: 0,
+      overrides: 0, 
+      wday: get_day,
+      day: Time.now.day,
+      month: Time.now.month,
+      year: Time.now.year
+      )
+  end
+
+  def not_rainy?
+    weather = access_days_weather
+    weather.precip_chance < threshold
   end
 
   private

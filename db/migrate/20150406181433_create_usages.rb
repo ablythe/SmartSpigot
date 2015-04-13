@@ -4,6 +4,7 @@ class CreateUsages < ActiveRecord::Migration
       t.belongs_to :user, index: true
       t.belongs_to :spigot, index: true
       t.integer :minutes
+      t.integer :water_saved
       t.integer :overrides
       t.integer :avg_temp
       t.string  :wday

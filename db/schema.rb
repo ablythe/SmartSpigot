@@ -39,14 +39,15 @@ ActiveRecord::Schema.define(version: 20150406181433) do
     t.integer  "user_id"
     t.integer  "spigot_id"
     t.integer  "minutes"
+    t.integer  "water_saved"
     t.integer  "overrides"
     t.integer  "avg_temp"
     t.string   "wday"
     t.integer  "day"
     t.integer  "month"
     t.integer  "year"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "usages", ["spigot_id"], name: "index_usages_on_spigot_id"
