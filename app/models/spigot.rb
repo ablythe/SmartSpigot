@@ -76,8 +76,8 @@ class Spigot < ActiveRecord::Base
     waters.each do |water|
       t = water.end_time
       Time.zone = timezone
-      hour =Time.now.hour
-      minute = Time.now.min
+      hour =Time.zone.now.hour
+      minute = Time.zone.now.min
       if hour == t.getlocal.hour && minute == t.getlocal.min
         self.off
       end
@@ -85,7 +85,8 @@ class Spigot < ActiveRecord::Base
   end
 
   def get_day
-    weekday = Time.now.getlocal.strftime('%A').downcase
+    Time.zone = timezone
+    weekday = Time.zone.now.strftime('%A').downcase
   end
 
   def on 

@@ -1,4 +1,5 @@
 class WateringsController < ApplicationController
+  
   def new
     @watering=Watering.new
     @spigot = Spigot.find(params[:spigot_id])
