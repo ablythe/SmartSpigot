@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20150406181433) do
     t.string   "zipcode"
     t.string   "street_address"
     t.string   "city"
-    t.boolean  "state"
+    t.string   "state"
     t.string   "country"
     t.integer  "threshold"
     t.string   "status",         default: "Off", null: false

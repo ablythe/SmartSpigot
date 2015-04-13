@@ -1,5 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Spigot, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before :each do
+    @spigot = FactoryGirl.create :spigot
+  end
+  it "can get a spigots watering schedule" do
+    FactoryGirl.create :watering, spigot: @spigot
+    schedule = @spigot.get_watering_schedule
+    expect(schedule[:count]).to eq 1
+    expect(schedule[:monday][1]).to eq 1
+  end
 end

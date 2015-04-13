@@ -99,18 +99,6 @@ class Spigot < ActiveRecord::Base
     update status: "Off"
   end
 
-  def water_usage limit=nil, scope
-    number = limit || usages.count
-    data =usages.order(created_at: :desc).limit(number)
-    gallons = {total: 0}
-    data.each do |d|
-      date = "#{d.month}/#{d.day}/#{d.year}"
-      gallons[date] = d.water_used
-      gallons[:total] += d.water_used
-    end
-    gallons
-  end
-
   def get_usage
     usages.where("created_at > ?", Time.now.midnight.utc).first_or_create!(
       minutes: 0, 

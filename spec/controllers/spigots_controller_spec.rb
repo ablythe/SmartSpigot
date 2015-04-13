@@ -31,24 +31,11 @@ RSpec.describe SpigotsController, type: :controller do
     expect(response.code.to_i).to eq 200
   end
 
-  it "knows when a spigot has waterings" do
-    
-  end
-
-  it "knows when a spigot doesn't have waterings" do
-  end
-
-  it "knows a spigot's city" do
-    spigot = FactoryGirl.create :spigot
-    get :show, id: spigot.id
-    expect(response.body).to include "Washington"
-  end
-
   it "knows if a spigot is on" do
     spigot =FactoryGirl.create :spigot
     get :show, id: spigot.id
     expect(response.body).to include "Status: Off"
-    spigot.on = true
+    spigot.status = "On"
     spigot.save
     get :show, id: spigot.id
     expect(response.body).to include "Status: On"

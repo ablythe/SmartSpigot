@@ -1,28 +1,15 @@
-== README
+Rails based app for automating watering of a lawn or garden.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Uses sidekiq and sidetiq as background scheduled workers to check whether the spigot should be turned on or off at the 30 second point of each minute.
 
-Things you may want to cover:
+Also pulls weather information from forecast io. Depending on user settings ("Rain Threshold") a scheduled watering will be canceled if the chance of rain is higher than the user's threshold.
 
-* Ruby version
+IMPLEMENTATION INSTRUCTIONS
+This version is designed to run on a local computer that is running a redis server, sidekiq, and a rails server.
 
-* System dependencies
+It could also be easily adapted to run on heroku.
 
-* Configuration
+SPIGOT REQUIREMENTS
+This is designed to be used with a custom built spigot. for my build I used an intel edison module that connects to a solenoid valve through a relay. The software on the edison module is the arduino basicwebserver demo, which enables the rails app to send a get request to turn on the solenoid and a get request to turn off the solenoid.
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Note: The need for the relay is because most solenoids require around 12 volts of power which is too high to run through the module. 
