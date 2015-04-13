@@ -7,7 +7,7 @@ class GardenerWorker
   def perform
     spigots = Spigot.all
     spigots.each do |spigot|
-      weather = spigot.get_days_weather
+      weather = spigot.access_days_weather
       todays_use = spigot.get_usage
       unless weather.precip_chance >= spigot.threshold
         if spigot.status == "On"
@@ -16,7 +16,8 @@ class GardenerWorker
           spigot.turn_on?
         end
       else
-        todays_use.overrides += 1
+        day = todays_use["wday"]
+        todays_use.overrides = spigot.waterings.where("#{day}": true).count
         todays_use.save!
       end
     end

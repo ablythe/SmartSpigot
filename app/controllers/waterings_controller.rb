@@ -9,18 +9,22 @@ class WateringsController < ApplicationController
     data = params['watering']
     start_time = Time.new(2000, 1, 1,data['start_time(4i)'], data['start_time(5i)'])
     end_time = Time.new(2000,1,1,data['end_time(4i)'], data['end_time(5i)'])
-    @spigot.waterings.create( 
-      start_time: start_time, 
-      end_time: end_time,
-      duration: end_time - start_time,
-      monday: data['monday'],
-      tuesday: data['tuesday'],
-      wednesday: data['wednesday'],
-      thursday: data['thursday'],
-      friday: data['friday'],
-      saturday: data['saturday'],
-      sunday: data['sunday'])
-    redirect_to spigot_path @spigot
+    if end_time < start_time
+      redirect_to :back, alert: "End Time must occur after Start Time"
+    else
+      @spigot.waterings.create( 
+        start_time: start_time, 
+        end_time: end_time,
+        duration: end_time - start_time,
+        monday: data['monday'],
+        tuesday: data['tuesday'],
+        wednesday: data['wednesday'],
+        thursday: data['thursday'],
+        friday: data['friday'],
+        saturday: data['saturday'],
+        sunday: data['sunday'])
+      redirect_to spigot_path @spigot
+    end
   end
 
   def show

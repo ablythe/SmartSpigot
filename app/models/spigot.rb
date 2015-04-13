@@ -56,7 +56,7 @@ class Spigot < ActiveRecord::Base
       hour =Time.now.hour
       minute = Time.now.min
       if hour == t.getlocal.hour && minute == t.getlocal.min
-        # self.on
+        self.on
         usage = get_usage
         usage.minutes += (water.duration / 60)
         usage.save!
@@ -83,12 +83,12 @@ class Spigot < ActiveRecord::Base
   end
 
   def on 
-    HTTParty.get("http://#{ip}:70/L")
+    # HTTParty.get("http://#{ip}:70/L")
     update status:"On"
   end
 
   def off
-    HTTParty.get("http://#{ip}:70/H")
+    # HTTParty.get("http://#{ip}:70/H")
     update status: "Off"
   end
 
@@ -112,7 +112,7 @@ class Spigot < ActiveRecord::Base
       seconds = 0
       watering_data.each { |w| seconds += w.end_time - w.start_time }
       usages.create(
-        minutes: seconds/60, 
+        minutes: 0, 
         overrides: 0, 
         wday: today, 
         day: Time.now.day,

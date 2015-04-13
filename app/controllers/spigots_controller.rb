@@ -37,13 +37,13 @@ class SpigotsController < ApplicationController
 
   def on
     @spigot = Spigot.find(params['spigot_id'])
-    @spigot.update! status: "On"
+    @spigot.on
     redirect_to :back, alert: "Spigot Turned On"
   end
 
   def off
     @spigot = Spigot.find(params['spigot_id'])
-    @spigot.update! status: "Off"
+    @spigot.off
     redirect_to :back, alert: "Spigot Turned Off"
   end
 

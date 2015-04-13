@@ -17,11 +17,11 @@ div class='container'
               =link_to "Off", {action: "off",spigot_id: @spigot.id}, method: :patch, type: "button",class: "btn btn-danger btn-lg"
             -else
               =link_to "On", {action: "on", spigot_id: @spigot.id}, method: :patch, type: "button", class: "btn btn-success btn-lg" 
-            
-
-        div class='row'
-    h4 Schedule
-    table class='table table-bordered'
+    div class="panel panel-primary"
+      div class='panel-heading'
+        div class='panel-title'= "Schedule"
+      div class='panel-body'
+        table class='table table-bordered table-condensed' width='400'
             -days =%w(monday tuesday wednesday thursday friday saturday sunday)
             thead
               tr
@@ -36,7 +36,7 @@ div class='container'
                       -if @watering_days[day.to_sym].count >= x+1
                        =link_to "#{@watering_days[day.to_sym][x]}", spigot_watering_path(spigot_id: @spigot, id: @watering_days[day.to_sym][x+1])
                       -else
-                        ="_________________"
+                        ="___________"
                 -x += 2            
     div class= 'row' 
       div class= 'panel panel-warning' 

@@ -5,7 +5,7 @@ div class= "container"
       legend Create a new Watering
       div class= "form-group"
         =w.label :start_time, class: "col-lg-4 control-label"
-        =w.time_select :start_time, ampm:true, minute_step: 15, default: {hour: 12}
+        =w.time_select :start_time, ampm:true, default: {hour: 12}
       div class= "form-group"
         =w.label :end_time, class: "col-lg-4 control-label"
         =w.time_select :end_time, ampm:true, minute_step: 15, default: {hour: 12}
