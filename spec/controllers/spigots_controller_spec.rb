@@ -1,5 +1,5 @@
 require 'rails_helper'
-ruby "2.2.0"
+
 RSpec.describe SpigotsController, type: :controller do
   render_views
   before :each do
