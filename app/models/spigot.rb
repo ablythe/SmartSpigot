@@ -72,7 +72,7 @@ class Spigot < ActiveRecord::Base
 
   def turn_off? 
     weekday = get_day
-    waters = waterings.where("#{weekday}": true).all
+    waters = waterings.where("#{weekday} == true").all
     waters.each do |water|
       t = water.end_time
       Time.zone = timezone
