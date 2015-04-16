@@ -10,8 +10,20 @@ div class= "container"
         =w.label :end_time, class: "col-lg-4 control-label"
         =w.time_select :end_time, ampm:true, minute_step: 15, default: {hour: 12}
       -days = %w(monday tuesday wednesday thursday friday saturday sunday)
-      -days.each do |d|
-        div class="form-group"
-          =w.label d.to_sym, class: "col-lg-4 control-label"
-          =w.check_box d.to_sym, {}, "true", "false"
+      table class="table table-bordered"
+        thead
+          tr
+            th M
+            th T
+            th W
+            th T
+            th F
+            th S
+            th S
+        tbody
+          tr
+            -days.each do |d|
+              td 
+                div class="form-group"
+                  =w.check_box d.to_sym, {checked: false, id:"wateringDays"}, "true", "false"
       =w.submit "Submit", class: 'btn btn-primary'
