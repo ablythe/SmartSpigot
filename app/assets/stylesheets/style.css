@@ -1,3 +1,4 @@
 body {
-  background-image: url("dark_tint.png"), url("tulips_background.jpg");
+  background: url("dark_tint.png"), url("tulips_background.jpg");
+  background-size: cover;
 }
