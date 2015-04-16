@@ -53,6 +53,7 @@ gem 'geocoder'
 gem 'sidekiq'
 gem 'sidetiq'
 gem 'redis-rails'
+'rails_12factor'
 
 group :development, :test do
   gem 'better_errors'
