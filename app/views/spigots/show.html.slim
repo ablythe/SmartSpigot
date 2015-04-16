@@ -21,7 +21,7 @@ div class='container'
               =link_to "Turn On", {action: "on", spigot_id: @spigot.id}, method: :patch, type: "button", class: "btn btn-success btn-lg" 
     div class="panel panel-primary"
       div class='panel-heading'
-        div class='panel-title'= "Schedule"
+        div class='panel-title'= "Schedule (Click the watering to see its schedule)"
       div class='panel-body'
         table class='table table-bordered table-condensed' width='400'
             -days =%w(monday tuesday wednesday thursday friday saturday sunday)
@@ -78,7 +78,7 @@ div class='container'
                             label: "Water Usage in Minutes",
                             fillColor: "rgba(215, 40, 40, 0.2)",
                             strokeColor: "rgba(215, 40, 40, 1)",
-                            pointColor: "color: rgba(215, 40, 40, 1)",
+                            pointColor: "rgba(215, 40, 40, 1)",
                             pointStrokeColor: "#000",
                             pointHighlightFill: "#000",
                             pointHighlightStroke: "rgba(215, 40, 40, 1)",
@@ -88,7 +88,7 @@ div class='container'
                             label: "Water Saved in Minutes",
                             fillColor: "rgba(0, 133, 0, 0.2)",
                             strokeColor: "rgba(0, 133, 0, 1)",
-                            pointColor: "color: rgba(0, 133, 0, 1)",
+                            pointColor: "rgba(0, 133, 0, 1)",
                             pointStrokeColor: "#000",
                             pointHighlightFill: "#000",
                             pointHighlightStroke: "rgba(0, 133, 0, 1)",

@@ -76,7 +76,7 @@ class Spigot < ActiveRecord::Base
     waters.each do |water|
       t = water.end_time
       Time.zone = timezone
-      hour =Time.zone.now.hour
+      hour = Time.zone.now.hour
       minute = Time.zone.now.min
       if hour == t.getlocal.hour && minute == t.getlocal.min
         self.off
