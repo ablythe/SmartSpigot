@@ -90,12 +90,12 @@ class Spigot < ActiveRecord::Base
   end
 
   def on 
-    # HTTParty.get("http://#{ip}:70/L")
+    HTTParty.get("http://#{ip}:70/L")
     update status:"On"
   end
 
   def off
-    # HTTParty.get("http://#{ip}:70/H")
+    HTTParty.get("http://#{ip}:70/H")
     update status: "Off"
   end
 
