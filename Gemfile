@@ -67,4 +67,5 @@ end
 group :test do
   gem 'simplecov'
   gem 'zonebie'
+  gem 'sqlite3'
 end
