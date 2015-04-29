@@ -1,4 +1,6 @@
 Rails based app for automating watering of a lawn or garden.
+Demo version: https://smart-spigot.herokuapp.com/ 
+  Sign in with google, and then register a dummy spigot to see the dashboard.
 
 Uses sidekiq and sidetiq as background scheduled workers to check whether the spigot should be turned on or off at the 30 second point of each minute.
 
