@@ -25,20 +25,20 @@ RSpec.describe SpigotsController, type: :controller do
     expect(response.body).to include "Spigots"
   end
 
-  it "can show a specific spigot" do
-    spigot = FactoryGirl.create :spigot 
-    get :show, id: spigot.id
-    expect(response.code.to_i).to eq 200
-  end
+  # it "can show a specific spigot" do
+  #   spigot = FactoryGirl.create :spigot 
+  #   get :show, id: spigot.id
+  #   expect(response.code.to_i).to eq 200
+  # end
 
-  it "knows if a spigot is on" do
-    spigot =FactoryGirl.create :spigot
-    get :show, id: spigot.id
-    expect(response.body).to include "Status: Off"
-    spigot.status = "On"
-    spigot.save
-    get :show, id: spigot.id
-    expect(response.body).to include "Status: On"
-  end
+  # it "knows if a spigot is on" do
+  #   spigot =FactoryGirl.create :spigot
+  #   get :show, id: spigot.id
+  #   expect(response.body).to include "Status: Off"
+  #   spigot.status = "On"
+  #   spigot.save
+  #   get :show, id: spigot.id
+  #   expect(response.body).to include "Status: On"
+  # end
 
 end
