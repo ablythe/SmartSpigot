@@ -1,4 +1,6 @@
+
 {<img src="https://travis-ci.org/ablythe/SmartSpigot.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/ablythe/SmartSpigot]
+
 
 Rails based app for automating watering of a lawn or garden.
   
